@@ -115,3 +115,20 @@
     </div>
   </div>
 </p-dialog>
+
+<p-dialog header="Aviso" [(visible)]="displayNuevo" [modal]="showModal">
+    <div class="ui-g">
+      <div class="ui-g-12" style="text-align:center">
+        El Cliente no existe, desea crear nuevo Cliente y aperturar Cuenta
+      </div>
+      <div class="ui-g-12" style="text-align:center">
+        <button
+          type="button"
+          pButton
+          icon="pi pi-check"
+          (click)="agrearCliente()"
+          label="Aceptar"
+        ></button>
+      </div>
+    </div>
+  </p-dialog>

@@ -24,6 +24,7 @@ export class TransferirPageComponent implements OnInit {
   showModal: boolean = true;
   disabled: boolean = true;
   displayTransaction: boolean = false;
+  displayNuevo: boolean = false;
   display: boolean = false;
   message: string;
 
@@ -71,9 +72,28 @@ export class TransferirPageComponent implements OnInit {
 
     this.blocked = true;
 
-    this.authService.login(dni).subscribe(data => {
+    this.authService.login(dni).subscribe((data: any) => {
       log.info(data);
+      this.blocked = false;
+    }, (error: any) => {
+      const { notExists } = error;
+
+      this.blocked = false;
+
+      if (notExists) {
+        this.nuevo();
+      }
     });
+  }
+
+  agrearCliente() {
+    this.displayNuevo = false;
+
+    this.router.navigate(['register']);
+  }
+
+  private nuevo() {
+    this.displayNuevo = true;
   }
 
   selectedAccount(account) {
