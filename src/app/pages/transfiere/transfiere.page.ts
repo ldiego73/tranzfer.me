@@ -9,7 +9,7 @@ const log = new Logger('Transfiere Page');
 @Component({
   selector: 'app-transfiere',
   templateUrl: './transfiere.page.html',
-  styleUrls: ['./transfiere.page.scss'],
+  styleUrls: ['./transfiere.page.scss', './transfiere.page.css'],
 })
 export class TransferirPageComponent {
   dni: number;

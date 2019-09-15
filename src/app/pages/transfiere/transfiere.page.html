@@ -1,13 +1,12 @@
 <div class="ui-fluid">
   <div class="ui-g">
     <div class="ui-g-12">
-      <p-panel header="Origen">
+      <p-panel header="ORIGEN">
         <div *ngIf="isLogged; else addAccount">
           <p-table [value]="accounts">
             <ng-template pTemplate="header">
               <tr>
-                <th>Seleccione</th>
-                <th>Banco</th>
+                <th>Elige</th>
                 <th>Tipo</th>
                 <th>Moneda</th>
                 <th># Cuenta</th>
@@ -16,9 +15,8 @@
             <ng-template pTemplate="body" let-account>
               <tr>
                 <td>
-                    <p-radioButton name="cuenta" (click)="selectedAccount(account)"></p-radioButton>
+                    <p-radioButton class="check-account" name="cuenta" (click)="selectedAccount(account)"></p-radioButton> {{ account.banco }}
                 </td>
-                <td>{{ account.banco }}</td>
                 <td>{{ account.tipo }}</td>
                 <td>{{ account.moneda }}</td>
                 <td>{{ account.numero_cuenta }}</td>
@@ -51,7 +49,7 @@
       </p-panel>
     </div>
     <div class="ui-g-12">
-      <p-panel header="Destino">
+      <p-panel header="DESTINO">
         <p>Nombres Completos</p>
         <div class="ui-inputgroup">
           <input type="text" pInputText [(ngModel)]="nombres" />
@@ -67,10 +65,10 @@
       </p-panel>
     </div>
     <div class="ui-g-12" *ngIf="isLogged">
-      <button
+      <button class="transfer-btn"
         pButton
         type="button"
-        label="Transfiere Ya"
+        label="TRANSFIERE YA"
         (click)="transferir()"
       ></button>
     </div>
