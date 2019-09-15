@@ -30,6 +30,14 @@ export class AuthService {
 
           this.authAccount(id, access_token).subscribe((data: any) => {
             const { _links } = data;
+
+            if (_links.hasOwnProperty('/customer/creation')) {
+              localStorage.setItem('init_token', access_token);
+
+              observer.error({ notExists: true });
+              return;
+            }
+
             const link = _links['/subscription/creation'].href;
 
             localStorage.setItem('dni', dni.toString());

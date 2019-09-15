@@ -1,1 +1,70 @@
-<h1>{{ title }}</h1>
+<app-header></app-header>
+
+<div class="ui-fluid">
+  <div class="ui-g">
+    <div class="ui-g-12">
+      <p-panel header="Nuevo Cliente">
+        <p>Nombres</p>
+        <div class="ui-inputgroup">
+          <input type="text" pInputText [(ngModel)]="cliente.nombres" />
+        </div>
+        <p>Apellidos</p>
+        <div class="ui-inputgroup">
+          <input type="text" pInputText [(ngModel)]="cliente.apellidos" />
+        </div>
+        <p>Correo</p>
+        <div class="ui-inputgroup">
+          <input type="email" pInputText [(ngModel)]="cliente.email" />
+        </div>
+        <p>Dirección</p>
+        <div class="ui-inputgroup">
+          <input type="text" pInputText [(ngModel)]="cliente.direccion" />
+        </div>
+        <p>Sexo</p>
+        <div>
+          <p-radioButton
+            name="sexo"
+            label="Hombre"
+            value="MALE"
+            [(ngModel)]="cliente.sexo"
+          ></p-radioButton>
+          <p-radioButton
+            name="sexo"
+            label="Mujer"
+            value="FEMALE"
+            [(ngModel)]="cliente.sexo"
+          ></p-radioButton>
+        </div>
+        <p>Documento</p>
+        <div class="ui-inputgroup">
+          <input type="number" pInputText [(ngModel)]="cliente.documento" [disabled]="true" />
+        </div>
+        <p>&nbsp;</p>
+        <p-messages [(value)]="message"></p-messages>
+        <p>&nbsp;</p>
+        <button pButton type="button" label="Crear" (click)="crear()"></button>
+      </p-panel>
+    </div>
+  </div>
+</div>
+
+<p-blockUI [blocked]="blocked"></p-blockUI>
+
+<p-dialog header="Cliente creado" [(visible)]="displayTransaction" [modal]="showModal">
+    <div class="ui-g">
+      <div class="ui-g-12" style="text-align:center">
+        El Cliente se ha creado exitosamente
+      </div>
+      <div class="ui-g-12" style="text-align:center">
+        <button
+          type="button"
+          pButton
+          icon="pi pi-check"
+          (click)="redirect()"
+          label="Aceptar"
+        ></button>
+      </div>
+    </div>
+  </p-dialog>
+
+<app-footer></app-footer>
