@@ -19,11 +19,13 @@ import { TransfiereServie } from './transfiere.service';
 import { MessageService } from 'primeng/api';
 
 import { Logger } from 'src/app/core/logger';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 const log = new Logger('Transfiere');
 
 @NgModule({
   imports: [
+    SharedModule,
     TransfiereRoutingModule,
     CommonModule,
     FormsModule,

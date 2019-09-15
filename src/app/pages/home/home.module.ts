@@ -12,13 +12,13 @@ import { DialogModule } from 'primeng/dialog';
 import { HomeRoutingModule } from './home-routing.module';
 import { HomePageComponent } from './home.page';
 import { Logger } from 'src/app/core/logger';
-import { HeaderComponent } from 'src/app/core/header';
-import { FooterComponent } from 'src/app/core/footer';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 const log = new Logger('Home');
 
 @NgModule({
   imports: [
+    SharedModule,
     HomeRoutingModule,
     CommonModule,
     FormsModule,
@@ -29,7 +29,7 @@ const log = new Logger('Home');
     CardModule,
     DialogModule,
   ],
-  declarations: [HomePageComponent, HeaderComponent, FooterComponent],
+  declarations: [HomePageComponent],
 })
 export class HomeModule {
   constructor() {

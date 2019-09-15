@@ -32,6 +32,8 @@ export class AuthService {
             const { _links } = data;
 
             if (_links.hasOwnProperty('/customer/creation')) {
+              localStorage.setItem('init_token', access_token);
+
               observer.error({ notExists: true });
               return;
             }

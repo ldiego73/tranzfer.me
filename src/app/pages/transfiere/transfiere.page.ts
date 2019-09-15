@@ -89,7 +89,7 @@ export class TransferirPageComponent implements OnInit {
   agrearCliente() {
     this.displayNuevo = false;
 
-    this.router.navigate(['register']);
+    this.router.navigate(['register', { documento: this.dni }]);
   }
 
   private nuevo() {
