@@ -9,6 +9,8 @@ import { DropdownModule } from 'primeng/dropdown';
 import { CardModule } from 'primeng/card';
 import { DialogModule } from 'primeng/dialog';
 import { BlockUIModule } from 'primeng/blockui';
+import { TableModule } from 'primeng/table';
+import { RadioButtonModule } from 'primeng/radiobutton';
 
 import { TransfiereRoutingModule } from './transfiere-routing.module';
 import { TransferirPageComponent } from './transfiere.page';
@@ -29,7 +31,9 @@ const log = new Logger('Transfiere');
     DropdownModule,
     CardModule,
     DialogModule,
-    BlockUIModule
+    BlockUIModule,
+    TableModule,
+    RadioButtonModule
   ],
   declarations: [TransferirPageComponent],
   providers: [TransfiereServie]

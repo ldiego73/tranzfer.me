@@ -8,6 +8,7 @@ export const environment = {
   username: 'cf284E36t43P944m',
   password: '627v2269VQM8dF49',
   apiKey: '7b9ede168a514ee38c619d77077c909b',
+  redirect: 'http://localhost:4200/loading',
 };
 
 /*

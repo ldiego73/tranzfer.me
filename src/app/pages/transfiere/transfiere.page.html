@@ -1,12 +1,72 @@
 <div class="ui-fluid">
   <div class="ui-g">
     <div class="ui-g-12">
-      <p>Transferir a</p>
-      <div class="ui-inputgroup">
-        <input type="number" pInputText [(ngModel)]="dni" maxlength="8" />
-      </div>
+      <p-panel header="Origen">
+        <div *ngIf="isLogged; else addAccount">
+          <p-table [value]="accounts">
+            <ng-template pTemplate="header">
+              <tr>
+                <th>Seleccione</th>
+                <th>Banco</th>
+                <th>Tipo</th>
+                <th>Moneda</th>
+                <th># Cuenta</th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-account>
+              <tr>
+                <td>
+                    <p-radioButton name="cuenta" (click)="selectedAccount(account)"></p-radioButton>
+                </td>
+                <td>{{ account.banco }}</td>
+                <td>{{ account.tipo }}</td>
+                <td>{{ account.moneda }}</td>
+                <td>{{ account.numero_cuenta }}</td>
+              </tr>
+            </ng-template>
+          </p-table>
+
+          <p>&nbsp;</p>
+
+          <button
+            pButton
+            type="button"
+            label="Agregar Cuenta"
+            (click)="agregar()"
+          ></button>
+        </div>
+        <ng-template #addAccount>
+          <p>DNI</p>
+          <div class="ui-inputgroup">
+            <input type="number" pInputText [(ngModel)]="dni" />
+          </div>
+          <p>&nbsp;</p>
+          <button
+            pButton
+            type="button"
+            label="Agregar Cuenta"
+            (click)="agregar()"
+          ></button>
+        </ng-template>
+      </p-panel>
     </div>
     <div class="ui-g-12">
+      <p-panel header="Destino">
+        <p>Nombres Completos</p>
+        <div class="ui-inputgroup">
+          <input type="text" pInputText [(ngModel)]="nombres" />
+        </div>
+        <p>Email</p>
+        <div class="ui-inputgroup">
+          <input type="email" pInputText [(ngModel)]="email" />
+        </div>
+        <p>Movíl</p>
+        <div class="ui-inputgroup">
+          <input type="number" pInputText [(ngModel)]="mobile" />
+        </div>
+      </p-panel>
+    </div>
+    <div class="ui-g-12" *ngIf="isLogged">
       <button
         pButton
         type="button"
