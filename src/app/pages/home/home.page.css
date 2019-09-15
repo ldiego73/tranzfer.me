@@ -14,7 +14,7 @@ input {
 }
 
 .ui-g {
-    width: 360px;
+    width: 420px;
     margin: 0px auto;
 }
 
@@ -46,4 +46,10 @@ input {
 .home-transfer-btn:hover {
     background-color: #1f7e35;
     border: 1px solid #1f7e35;
+}
+
+@media screen and (max-width: 420px) {
+    .ui-g {
+        width: 90%;
+    }
 }

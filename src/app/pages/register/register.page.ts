@@ -10,7 +10,7 @@ const log = new Logger('Register Page');
 @Component({
   selector: 'app-register',
   templateUrl: './register.page.html',
-  styleUrls: ['./register.page.scss'],
+  styleUrls: ['./register.page.scss', './register.page.css'],
 })
 export class RegisterPageComponent {
   cliente: any = {};
