@@ -52,6 +52,7 @@
     "koa-helmet": "^4.2.0",
     "koa-morgan": "^1.0.1",
     "koa-router": "^7.4.0",
+    "nodemailer": "^6.3.0",
     "swagger2-koa": "^1.0.4",
     "yenv": "^2.1.0"
   },
