@@ -72,12 +72,22 @@
       </p-panel>
     </div>
     <div class="ui-g-12" *ngIf="isLogged">
-      <button
-        pButton
-        type="button"
-        label="Transfiere Ya"
-        (click)="transferir()"
-      ></button>
+      <div class="ui-g-6">
+        <button
+          pButton
+          type="button"
+          label="Transfiere Ya"
+          (click)="transferir()"
+        ></button>
+      </div>
+      <div class="ui-g-6">
+        <button
+          pButton
+          type="button"
+          label="Ver Actividad"
+          (click)="actividad()"
+        ></button>
+      </div>
     </div>
   </div>
 </div>
@@ -101,10 +111,15 @@
   </div>
 </p-dialog>
 
-<p-dialog header="Transacción exitosa" [(visible)]="displayTransaction" [modal]="showModal">
+<p-dialog
+  header="Transacción exitosa"
+  [(visible)]="displayTransaction"
+  [modal]="showModal"
+>
   <div class="ui-g">
     <div class="ui-g-12" style="text-align:center">
-        La transacción ha sido enviado con exito, espere unos segundos para confirmar el envío
+      La transacción ha sido enviado con exito, nosotros te avisaremos cuando se
+      complete tu transferencia
     </div>
     <div class="ui-g-12" style="text-align:center">
       <button
@@ -119,20 +134,20 @@
 </p-dialog>
 
 <p-dialog header="Aviso" [(visible)]="displayNuevo" [modal]="showModal">
-    <div class="ui-g">
-      <div class="ui-g-12" style="text-align:center">
-        El Cliente no existe, desea crear nuevo Cliente y aperturar Cuenta
-      </div>
-      <div class="ui-g-12" style="text-align:center">
-        <button
-          type="button"
-          pButton
-          icon="pi pi-check"
-          (click)="agrearCliente()"
-          label="Aceptar"
-        ></button>
-      </div>
+  <div class="ui-g">
+    <div class="ui-g-12" style="text-align:center">
+      El Cliente no existe, desea crear nuevo Cliente y aperturar Cuenta
     </div>
-  </p-dialog>
+    <div class="ui-g-12" style="text-align:center">
+      <button
+        type="button"
+        pButton
+        icon="pi pi-check"
+        (click)="agrearCliente()"
+        label="Aceptar"
+      ></button>
+    </div>
+  </div>
+</p-dialog>
 
 <app-footer></app-footer>

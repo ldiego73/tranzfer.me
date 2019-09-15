@@ -19,6 +19,10 @@ const routes: Routes = [
     path: 'loading',
     loadChildren: './pages/loading/loading.module#LoadingModule',
   },
+  {
+    path: 'actividad',
+    loadChildren: './pages/actividad/actividad.module#ActividadModule',
+  },
 ];
 
 @NgModule({

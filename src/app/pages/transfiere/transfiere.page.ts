@@ -142,4 +142,8 @@ export class TransferirPageComponent implements OnInit {
     this.displayTransaction = false;
     this.router.navigate(['']);
   }
+
+  actividad() {
+    this.router.navigate(['actividad']);
+  }
 }
