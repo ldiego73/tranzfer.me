@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { SelectItem } from 'primeng/api';
 
 import { Logger } from 'src/app/core/logger';
+import { AuthService } from 'src/app/core/auth/auth.service';
 
 const log = new Logger('Home Page');
 
@@ -34,7 +35,7 @@ export class HomePageComponent {
   display: boolean = false;
   message: string;
 
-  constructor(private route: Router) {
+  constructor(private route: Router, private authService: AuthService) {
     this.countries = [
       { label: 'Select Country', value: null },
       { label: 'USA', value: { id: 1, name: 'USA', code: 'USA' } },

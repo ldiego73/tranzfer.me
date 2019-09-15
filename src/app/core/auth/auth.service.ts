@@ -148,28 +148,42 @@ export class AuthService {
         )
         .subscribe((data: any) => {
           const { access_token } = data;
-          const accounts = JSON.parse(localStorage.getItem('accounts')) || [];
-          const number = accounts.length + 1;
+          const isRefresh = localStorage.getItem('isRefresh') || '';
 
-          accounts.push({
-            id: accounts.length + 1,
-            banco: 'Interbank',
-            tipo: 'Ahorros',
-            moneda: number % 2 === 0 ? 'Soles' : 'Dolares',
-            numero_cuenta: this.getAccount(),
-          });
+          if (isRefresh !== 'true') {
+            const accounts = JSON.parse(localStorage.getItem('accounts')) || [];
+            const number = accounts.length + 1;
 
-          localStorage.setItem('accounts', JSON.stringify(accounts));
+            accounts.push({
+              id: accounts.length + 1,
+              banco: 'Interbank',
+              tipo: 'Ahorros',
+              moneda: number % 2 === 0 ? 'Soles' : 'Dolares',
+              numero_cuenta: this.getAccount(),
+            });
+
+            localStorage.setItem('accounts', JSON.stringify(accounts));
+          }
+
           localStorage.setItem('session', JSON.stringify(data));
           localStorage.setItem('token', access_token);
+          localStorage.setItem('isRefresh', 'false');
 
           observer.next(true);
         });
     });
   }
 
+  refreshToken() {
+    localStorage.setItem('isRefresh', 'true');
+    window.location.href = `https://securitydev.digital.interbank.pe/oauth/authorize?response_type=code&client_id=${environment.username}&scope=token:subscription&state=foo&redirect_uri=${environment.redirect}`;
+  }
+
   private getAccount() {
-    return `${randomInt(1000, 9999)} ${randomInt(1000, 9999)} ${randomInt(1000, 9999)} ${randomInt(1000, 9999)}`;
+    return `${randomInt(1000, 9999)} ${randomInt(1000, 9999)} ${randomInt(
+      1000,
+      9999
+    )} ${randomInt(1000, 9999)}`;
   }
 
   public logout() {
@@ -179,10 +193,15 @@ export class AuthService {
 
   public isAuthenticated(): boolean {
     const token = localStorage.getItem('token');
-    const isValid = this.jwtHelper.isTokenExpired(token);
 
-    console.log(`El Token es => ${isValid}`);
+    if (!token) {
+      return false;
+    }
 
-    return !isValid;
+    return !this.jwtHelper.isTokenExpired(token);
+  }
+
+  public existsToken() {
+    return localStorage.getItem('token');
   }
 }
