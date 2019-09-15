@@ -1,0 +1,50 @@
+* {
+    font-family: Calibri;
+    color: #666666;
+}
+
+input, p-dropdown {
+    -webkit-box-shadow: 0px 13px 20px -5px rgba(0,0,0,0.28);
+    -moz-box-shadow: 0px 13px 20px -5px rgba(0,0,0,0.28);
+    box-shadow: 0px 13px 20px -5px rgba(0,0,0,0.28);    
+}
+
+input {
+    border: 1px solid #d8d8d8;
+    
+}
+
+.ui-g {
+    width: 360px;
+    margin: 0px auto;
+}
+
+.header-text {
+    font-size: 32px;
+    font-weight: bold;
+    text-align: center;
+    color: rgb(40, 40, 93); 
+}
+
+.home-highlight {
+    color: rgb(40, 40, 93);
+}
+
+.ui-card-content {
+    color: rgb(40, 40, 93);
+}
+
+.home-transfer-btn {
+    display: block;
+    margin: 30px auto;
+    padding: 10px;
+    width: 100%;
+    background-color: #28a745;
+    border: 1px solid #28a745;
+    font-size: 20px;
+}
+
+.home-transfer-btn:hover {
+    background-color: #1f7e35;
+    border: 1px solid #1f7e35;
+}

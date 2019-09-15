@@ -1,7 +1,10 @@
 <div class="ui-fluid">
   <div class="ui-g">
     <div class="ui-g-12">
-      <p>Tu envías</p>
+      <p class="header-text">¿Cuánto te gustaría transferir?</p>
+    </div>
+    <div class="ui-g-12">
+      <p>Envías</p>
       <div class="ui-inputgroup">
         <input
           type="number"
@@ -17,7 +20,15 @@
       </div>
     </div>
     <div class="ui-g-12">
-      <p>Tu destinatario recibe</p>
+      <p-card class="home-card">
+        <p>Tipo de cambio: {{ tipoCambio | number: '1.2-2' }}</p>
+        <p>Debería llegar a un máximo de: <span class="home-highlight"> {{ days }} Día(s)</span></p>
+        <p>Comisión Transfer.me: {{ montoComision | number: '1.2-2' }}</p>
+        <p>Total a transferir: {{ montoFrom | number: '1.2-2' }}</p>
+      </p-card>
+    </div>
+    <div class="ui-g-12">
+      <p>Destinatario obtiene</p>
       <div class="ui-inputgroup">
         <input
           type="number"
@@ -34,15 +45,7 @@
       </div>
     </div>
     <div class="ui-g-12">
-      <p-card>
-        <p>Tipo de cambio: {{ tipoCambio | number: '1.2-2' }}</p>
-        <p>Debería llegar a un máximo de: {{ days }} Día(s)</p>
-        <p>Comisión Transfer.me: {{ montoComision | number: '1.2-2' }}</p>
-        <p>Total a transferir: {{ montoFrom | number: '1.2-2' }}</p>
-      </p-card>
-    </div>
-    <div class="ui-g-12">
-      <button
+      <button class="home-transfer-btn"
         pButton
         type="button"
         label="Transfiere Ya"

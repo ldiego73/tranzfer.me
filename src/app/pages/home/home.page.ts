@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { SelectItem } from 'primeng/api';
 
 import { Logger } from 'src/app/core/logger';
+import { homedir } from 'os';
 
 const log = new Logger('Home Page');
 
@@ -15,7 +16,7 @@ interface Country {
 @Component({
   selector: 'app-home',
   templateUrl: './home.page.html',
-  styleUrls: ['./home.page.scss'],
+  styleUrls: ['./home.page.scss', './home.page.css'],
 })
 export class HomePageComponent {
   countries: SelectItem[];
