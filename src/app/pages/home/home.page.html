@@ -1,0 +1,70 @@
+<div class="ui-fluid">
+  <div class="ui-g">
+    <div class="ui-g-12">
+      <p>Tu envías</p>
+      <div class="ui-inputgroup">
+        <input
+          type="number"
+          pInputText
+          [(ngModel)]="montoFrom"
+          (ngModelChange)="montoChanged($event)"
+        />
+        <p-dropdown
+          [options]="countries"
+          [(ngModel)]="countryFrom"
+          (onChange)="countryFromChange($event)"
+        ></p-dropdown>
+      </div>
+    </div>
+    <div class="ui-g-12">
+      <p>Tu destinatario recibe</p>
+      <div class="ui-inputgroup">
+        <input
+          type="number"
+          pInputText
+          placeholder="Price"
+          [disabled]="disabled"
+          [(ngModel)]="montoTo"
+        />
+        <p-dropdown
+          [options]="countries"
+          [(ngModel)]="countryTo"
+          (onChange)="countryToChange($event)"
+        ></p-dropdown>
+      </div>
+    </div>
+    <div class="ui-g-12">
+      <p-card>
+        <p>Tipo de cambio: {{ tipoCambio | number: '1.2-2' }}</p>
+        <p>Debería llegar a un máximo de: {{ days }} Día(s)</p>
+        <p>Comisión Transfer.me: {{ montoComision | number: '1.2-2' }}</p>
+        <p>Total a transferir: {{ montoFrom | number: '1.2-2' }}</p>
+      </p-card>
+    </div>
+    <div class="ui-g-12">
+      <button
+        pButton
+        type="button"
+        label="Transfiere Ya"
+        (click)="enviar()"
+      ></button>
+    </div>
+  </div>
+</div>
+
+<p-dialog header="Aviso" [(visible)]="display" [modal]="showModal">
+  <div class="ui-g">
+    <div class="ui-g-12" style="text-align:center">
+      {{ message }}
+    </div>
+    <div class="ui-g-12" style="text-align:center">
+      <button
+        type="button"
+        pButton
+        icon="pi pi-check"
+        (click)="display = false"
+        label="Cerrar"
+      ></button>
+    </div>
+  </div>
+</p-dialog>
