@@ -52,6 +52,13 @@
         label="TRANSFIERE YA"
         (click)="enviar()"
       ></button>
+      <button class="home-transfer-btn"
+        *ngIf="isLogged"
+        pButton
+        type="button"
+        label="VER ACTIVIDAD"
+        (click)="actividad()"
+      ></button>
     </div>
   </div>
 </div>

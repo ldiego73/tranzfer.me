@@ -35,7 +35,7 @@ export class TransferirPageComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
-    private router: Router,
+    private route: Router,
     private transfiereService: TransfiereServie
   ) {}
 
@@ -45,7 +45,7 @@ export class TransferirPageComponent implements OnInit {
     this.isLogged = this.authService.isAuthenticated();
 
     if (!transfiere) {
-      this.router.navigate(['']);
+      this.route.navigate(['']);
     }
 
     if (token && !this.isLogged) {
@@ -92,7 +92,7 @@ export class TransferirPageComponent implements OnInit {
   agrearCliente() {
     this.displayNuevo = false;
 
-    this.router.navigate(['register', { documento: this.dni }]);
+    this.route.navigate(['register', { documento: this.dni }]);
   }
 
   private nuevo() {
@@ -156,10 +156,10 @@ export class TransferirPageComponent implements OnInit {
 
   redirect() {
     this.displayTransaction = false;
-    this.router.navigate(['']);
+    this.route.navigate(['']);
   }
 
   actividad() {
-    this.router.navigate(['actividad']);
+    this.route.navigate(['actividad']);
   }
 }

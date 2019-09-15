@@ -36,6 +36,8 @@ export class HomePageComponent {
   display: boolean = false;
   message: string;
 
+  isLogged: boolean;
+
   constructor(private route: Router, private authService: AuthService) {
     this.countries = [
       { label: 'Select Country', value: null },
@@ -46,6 +48,8 @@ export class HomePageComponent {
         value: { id: 3, name: 'Perú Dolares', code: 'PE' },
       },
     ];
+
+    this.isLogged = this.authService.isAuthenticated();
   }
 
   montoChanged() {
@@ -136,5 +140,9 @@ export class HomePageComponent {
     );
 
     this.route.navigate(['transfiere']);
+  }
+
+  actividad() {
+    this.route.navigate(['actividad']);
   }
 }
