@@ -1,0 +1,20 @@
+<app-header></app-header>
+
+<div class="ui-fluid">
+  <div class="ui-g">
+    <div class="ui-g-12">
+      <div *ngFor="let a of actividades">
+        <div class="ui-g-6">
+          <p>Transferir a <b>{{ a.person }}</b></p>
+          <p>{{ a.status }}, {{ format(a.created) }}</p>
+        </div>
+        <div class="ui-g-6" style="text-align: right">
+          <p>Tranferido: {{ a.currency_from }} {{ a.montoFrom | number:'1.2-2' }}</p>
+          <p>Enviado: {{ a.currency_to }} {{ a.montoTo | number:'1.2-2'  }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>
