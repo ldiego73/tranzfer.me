@@ -20,8 +20,7 @@ export class ActividadPageComponent implements OnInit{
 
   constructor(
     private actividadService: ActividadService,
-    private route: ActivatedRoute,
-    private router: Router
+    private route: Router
   ) {
   }
 
@@ -34,5 +33,9 @@ export class ActividadPageComponent implements OnInit{
 
   format(created: number) {
     return moment(created).format('DD MMMM YYYY');
+  }
+
+  transferir() {
+    this.route.navigate(['']);
   }
 }
