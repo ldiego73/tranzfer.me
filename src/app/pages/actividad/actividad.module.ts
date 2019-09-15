@@ -20,6 +20,7 @@ import { ActividadPageComponent } from './actividad.page';
 import { Logger } from 'src/app/core/logger';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { MessageService } from 'primeng/api';
+import { ActividadService } from './actividad.service';
 
 const log = new Logger('Register');
 
@@ -43,7 +44,7 @@ const log = new Logger('Register');
     MessageModule,
   ],
   declarations: [ActividadPageComponent],
-  providers: [MessageService]
+  providers: [MessageService, ActividadService]
 })
 export class ActividadModule {
   constructor() {

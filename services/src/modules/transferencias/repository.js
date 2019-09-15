@@ -4,6 +4,7 @@ export default class {
   async add(data) {
     return new Promise(resolve => {
       data.id = transferencias.length
+      data.created = new Date().getTime()
 
       transferencias.push(data)
 

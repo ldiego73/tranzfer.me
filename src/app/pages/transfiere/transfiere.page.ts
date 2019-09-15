@@ -72,18 +72,21 @@ export class TransferirPageComponent implements OnInit {
 
     this.blocked = true;
 
-    this.authService.login(dni).subscribe((data: any) => {
-      log.info(data);
-      this.blocked = false;
-    }, (error: any) => {
-      const { notExists } = error;
+    this.authService.login(dni).subscribe(
+      (data: any) => {
+        log.info(data);
+        this.blocked = false;
+      },
+      (error: any) => {
+        const { notExists } = error;
 
-      this.blocked = false;
+        this.blocked = false;
 
-      if (notExists) {
-        this.nuevo();
+        if (notExists) {
+          this.nuevo();
+        }
       }
-    });
+    );
   }
 
   agrearCliente() {
@@ -135,6 +138,19 @@ export class TransferirPageComponent implements OnInit {
 
       this.blocked = false;
       this.displayTransaction = true;
+
+      this.transfiereService
+        .add({
+          currency_from: transfiere.countryFrom.code === 'USA' ? 'USD' : 'PEN',
+          currency_to: transfiere.countryTo.code === 'USA' ? 'USD' : 'PEN',
+          person: this.nombres,
+          montoComision: transfiere.montoComision,
+          montoFrom: transfiere.montoFrom,
+          montoTo: transfiere.montoTo,
+        })
+        .subscribe(() => {
+          this.actividad();
+        });
     });
   }
 

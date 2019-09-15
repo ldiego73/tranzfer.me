@@ -1,6 +1,7 @@
 import Koa from 'koa'
 import helmet from 'koa-helmet'
 import bodyParser from 'koa-bodyparser'
+import cors from '@koa/cors'
 import log from 'fancy-log'
 import yenv from 'yenv'
 
@@ -23,6 +24,7 @@ server
   .use(accessLogger)
   .use(errorLogger)
   .use(helmet.contentSecurityPolicy(csp))
+  .use(cors())
   .use(compress)
   .use(bodyParser())
   .use(notFavicon)
