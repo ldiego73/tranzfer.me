@@ -51,10 +51,7 @@ export class TransfiereServie {
 
   add(data) {
     return this.http.post('http://localhost:3000/transferencias', {
-      person: data.nombres,
-      montoComision: data.montoComision,
-      montoFrom: data.montoFrom,
-      montoTo: data.montoTo,
+      data
     });
   }
 }

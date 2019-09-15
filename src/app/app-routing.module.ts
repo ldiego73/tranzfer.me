@@ -22,6 +22,7 @@ const routes: Routes = [
   {
     path: 'actividad',
     loadChildren: './pages/actividad/actividad.module#ActividadModule',
+    canActivate: [AuthGuardService],
   },
 ];
 
