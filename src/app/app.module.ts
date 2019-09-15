@@ -6,11 +6,9 @@ import { JwtModule } from '@auth0/angular-jwt';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './core/header';
-import { FooterComponent } from './core/footer';
 import { AuthGuardService } from './core/auth/auth.guard';
 
-const components = [HeaderComponent, FooterComponent];
+const components = [];
 
 @NgModule({
   declarations: [AppComponent, ...components],

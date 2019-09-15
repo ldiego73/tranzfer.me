@@ -12,6 +12,8 @@ import { DialogModule } from 'primeng/dialog';
 import { HomeRoutingModule } from './home-routing.module';
 import { HomePageComponent } from './home.page';
 import { Logger } from 'src/app/core/logger';
+import { HeaderComponent } from 'src/app/core/header';
+import { FooterComponent } from 'src/app/core/footer';
 
 const log = new Logger('Home');
 
@@ -27,7 +29,7 @@ const log = new Logger('Home');
     CardModule,
     DialogModule,
   ],
-  declarations: [HomePageComponent],
+  declarations: [HomePageComponent, HeaderComponent, FooterComponent],
 })
 export class HomeModule {
   constructor() {
