@@ -4,18 +4,8 @@ import { environment } from '../../../environments/environment';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Observable } from 'rxjs';
 
-export interface Session {
-  id: number;
-  userId: number;
-  username: string;
-  lastName1: string;
-  lastName2: string;
-  phone: string;
-  direction: string;
-  dni: string;
-  names: string;
-  email: string;
-}
+export const randomInt = (min: number, max: number) =>
+  Math.floor(Math.random() * (max - min + 1)) + min;
 
 @Injectable({
   providedIn: 'root',
@@ -42,8 +32,10 @@ export class AuthService {
             const { _links } = data;
             const link = _links['/subscription/creation'].href;
 
+            localStorage.setItem('dni', dni.toString());
+
             // tslint:disable-next-line: max-line-length
-            window.location.href = `${link}?response_type=code&client_id=${environment.username}&scope=token:subscription&state=foo&redirect_uri=http://localhost:4200/register`;
+            window.location.href = `${link}?response_type=code&client_id=${environment.username}&scope=token:subscription&state=foo&redirect_uri=${environment.redirect}`;
           });
         });
       });
@@ -136,17 +128,48 @@ export class AuthService {
     );
   }
 
-  public createSession(res: any) {
-    localStorage.setItem('session', JSON.stringify(res));
-    localStorage.setItem('token', res.access_token);
+  createSession(code: string): Observable<boolean> {
+    const endpoint = `${environment.api}/security/v1/oauth/token`;
+
+    return new Observable(observer => {
+      this.http
+        .post(
+          endpoint,
+          `code=${code}&grant_type=authorization_code&redirect_uri=${environment.redirect}`,
+          {
+            headers: new HttpHeaders({
+              'Content-Type': 'application/x-www-form-urlencoded',
+              'Ocp-Apim-Subscription-Key': environment.apiKey,
+              Authorization: `Basic ${btoa(
+                environment.username + ':' + environment.password
+              )}`,
+            }),
+          }
+        )
+        .subscribe((data: any) => {
+          const { access_token } = data;
+          const accounts = JSON.parse(localStorage.getItem('accounts')) || [];
+          const number = accounts.length + 1;
+
+          accounts.push({
+            id: accounts.length + 1,
+            banco: 'Interbank',
+            tipo: 'Ahorros',
+            moneda: number % 2 === 0 ? 'Soles' : 'Dolares',
+            numero_cuenta: this.getAccount(),
+          });
+
+          localStorage.setItem('accounts', JSON.stringify(accounts));
+          localStorage.setItem('session', JSON.stringify(data));
+          localStorage.setItem('token', access_token);
+
+          observer.next(true);
+        });
+    });
   }
 
-  public session(): Session {
-    return JSON.parse(localStorage.getItem('session'));
-  }
-
-  public updateSession(session: Session) {
-    localStorage.setItem('session', JSON.stringify(session));
+  private getAccount() {
+    return `${randomInt(1000, 9999)} ${randomInt(1000, 9999)} ${randomInt(1000, 9999)} ${randomInt(1000, 9999)}`;
   }
 
   public logout() {
@@ -156,6 +179,10 @@ export class AuthService {
 
   public isAuthenticated(): boolean {
     const token = localStorage.getItem('token');
-    return !this.jwtHelper.isTokenExpired(token);
+    const isValid = this.jwtHelper.isTokenExpired(token);
+
+    console.log(`El Token es => ${isValid}`);
+
+    return !isValid;
   }
 }
