@@ -206,7 +206,11 @@ export class AuthService {
       return false;
     }
 
-    return !this.jwtHelper.isTokenExpired(token);
+    try {
+      return !this.jwtHelper.isTokenExpired(token);
+    } catch {
+      return false;
+    }
   }
 
   public existsToken() {
