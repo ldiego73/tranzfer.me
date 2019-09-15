@@ -15,7 +15,7 @@
             <ng-template pTemplate="body" let-account>
               <tr>
                 <td>
-                    <p-radioButton class="check-account" name="cuenta" (click)="selectedAccount(account)"></p-radioButton> {{ account.banco }}
+                  <p-radioButton class="check-account" name="cuenta" (click)="selectedAccount(account)"></p-radioButton> {{ account.banco }}
                 </td>
                 <td>{{ account.tipo }}</td>
                 <td>{{ account.moneda }}</td>
@@ -89,6 +89,23 @@
         icon="pi pi-check"
         (click)="display = false"
         label="Cerrar"
+      ></button>
+    </div>
+  </div>
+</p-dialog>
+
+<p-dialog header="Transacción exitosa" [(visible)]="displayTransaction" [modal]="showModal">
+  <div class="ui-g">
+    <div class="ui-g-12" style="text-align:center">
+        La transacción ha sido enviado con exito, espere unos segundos para confirmar el envío
+    </div>
+    <div class="ui-g-12" style="text-align:center">
+      <button
+        type="button"
+        pButton
+        icon="pi pi-check"
+        (click)="redirect()"
+        label="Aceptar"
       ></button>
     </div>
   </div>

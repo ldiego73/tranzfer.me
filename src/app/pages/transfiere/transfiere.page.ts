@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { Logger } from 'src/app/core/logger';
 import { TransfiereServie } from './transfiere.service';
 import { AuthService } from 'src/app/core/auth/auth.service';
+import { Router } from '@angular/router';
 
 const log = new Logger('Transfiere Page');
 
@@ -11,7 +12,7 @@ const log = new Logger('Transfiere Page');
   templateUrl: './transfiere.page.html',
   styleUrls: ['./transfiere.page.scss', './transfiere.page.css'],
 })
-export class TransferirPageComponent {
+export class TransferirPageComponent implements OnInit {
   dni: number;
 
   nombres: string;
@@ -22,6 +23,7 @@ export class TransferirPageComponent {
 
   showModal: boolean = true;
   disabled: boolean = true;
+  displayTransaction: boolean = false;
   display: boolean = false;
   message: string;
 
@@ -32,13 +34,28 @@ export class TransferirPageComponent {
 
   constructor(
     private authService: AuthService,
+    private router: Router,
     private transfiereService: TransfiereServie
-  ) {
+  ) {}
+
+  ngOnInit() {
+    const transfiere = localStorage.getItem('transfiere');
+    const token = this.authService.existsToken();
     this.isLogged = this.authService.isAuthenticated();
+
+    if (!transfiere) {
+      this.router.navigate(['']);
+    }
+
+    if (token && !this.isLogged) {
+      this.authService.refreshToken();
+    }
   }
 
   agregar() {
-    const dni = this.isLogged ? parseInt(localStorage.getItem('dni')) : this.dni;
+    const dni = this.isLogged
+      ? parseInt(localStorage.getItem('dni'))
+      : this.dni;
 
     if (!dni) {
       this.display = true;
@@ -87,5 +104,22 @@ export class TransferirPageComponent {
       this.message = 'Debe ingresar el Movíl';
       return;
     }
+
+    const transfiere = JSON.parse(localStorage.getItem('transfiere'));
+
+    this.blocked = true;
+
+    this.transfiereService.transfer(transfiere.montoTo).subscribe(data => {
+      log.info(data);
+      localStorage.removeItem('transfiere');
+
+      this.blocked = false;
+      this.displayTransaction = true;
+    });
+  }
+
+  redirect() {
+    this.displayTransaction = false;
+    this.router.navigate(['']);
   }
 }

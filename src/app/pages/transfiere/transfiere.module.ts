@@ -11,10 +11,12 @@ import { DialogModule } from 'primeng/dialog';
 import { BlockUIModule } from 'primeng/blockui';
 import { TableModule } from 'primeng/table';
 import { RadioButtonModule } from 'primeng/radiobutton';
+import { ToastModule } from 'primeng/toast';
 
 import { TransfiereRoutingModule } from './transfiere-routing.module';
 import { TransferirPageComponent } from './transfiere.page';
 import { TransfiereServie } from './transfiere.service';
+import { MessageService } from 'primeng/api';
 
 import { Logger } from 'src/app/core/logger';
 
@@ -33,10 +35,11 @@ const log = new Logger('Transfiere');
     DialogModule,
     BlockUIModule,
     TableModule,
-    RadioButtonModule
+    RadioButtonModule,
+    ToastModule
   ],
   declarations: [TransferirPageComponent],
-  providers: [TransfiereServie]
+  providers: [TransfiereServie, MessageService]
 })
 export class TransfiereModule {
   constructor() {
