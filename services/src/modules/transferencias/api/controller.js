@@ -15,7 +15,7 @@ processQueue.process(async (job, done) => {
   const { data } = job
   const { id } = data
 
-  await sleep(5000)
+  await sleep(10000)
   await service.update(id, 'FINISHED')
 
   done(null, true)
