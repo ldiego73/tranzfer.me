@@ -15,7 +15,7 @@ const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
     user: 'lfdiego7@gmail.com',
-    pass: '',
+    pass: '111111',
   },
 })
 
@@ -344,9 +344,13 @@ processQueue.process(async (job, done) => {
   await sleep(5000)
   await service.update(id, 'FINISHED')
   console.log('Actualizado')
-  const result = await transporter.sendMail(mailOptions)
-  console.log('Enviado')
-  done(null, true)
+  try {
+    await transporter.sendMail(mailOptions)
+  } finally {
+    console.log('Enviado')
+    done(null, true)
+  }
+
 })
 
 processQueue.on('completed', job => {

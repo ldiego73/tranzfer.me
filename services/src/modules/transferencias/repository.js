@@ -16,6 +16,8 @@ export default class {
     return new Promise(resolve => {
       const t = transferencias.find(t => t.id === id)
 
+      if (!t) resolve(true)
+
       t.status = status
 
       resolve(true)

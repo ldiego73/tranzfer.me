@@ -19,8 +19,17 @@ export class TransfiereServie {
     const session = JSON.parse(localStorage.getItem('session'));
     const { scope } = session;
     const parts = scope.split(' ');
-    const account = parts[3].split(':')[1];
-    const currency = parts[4].split(':')[1];
+
+    let account = '';
+    let currency = '';
+
+    parts.forEach((p: string) => {
+      if (p.indexOf('account') > -1) {
+        account = p.split(':')[1];
+      } else if (p.indexOf('currency') > -1) {
+        currency = p.split(':')[1];
+      }
+    });
 
     const endpoint = `${environment.api}/trx/v1/accounts/${account}/transactions`;
     const newId = new Date().getTime();
